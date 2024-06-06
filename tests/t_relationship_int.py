@@ -4,9 +4,7 @@ import unittest
 from model.user import User
 from model.place import Place
 from model.review import Review
-from persistence.u_dao import UserDAO
-from persistence.p_dao import PlaceDAO
-from persistence.r_dao import ReviewDAO
+
 
 class TestRelationshipIntegrity(unittest.Testcase):
     def test_places_to_host_users(self):
@@ -20,3 +18,6 @@ class TestRelationshipIntegrity(unittest.Testcase):
         review = Review(1, place, user, 5, "Great place!")
         self.assertEqual(review.user, user)
         self.assertEqual(review.place, place)
+
+if __name__ == '__main__':
+    unittest.main()

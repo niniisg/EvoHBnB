@@ -20,3 +20,6 @@ class TestBusinessRuleEnforcement(unittest.TestCase):
         user_dao.save_user(user1)
         with self.assertRaises(ValueError):
             user_dao.save_user(user2)
+
+if __name__ == '__main__':
+    unittest.main()

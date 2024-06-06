@@ -8,3 +8,6 @@ class TestConsistencyChecks(unittest.TestCase):
         user = User(1, "user@test.com", "User")
         self.assertIsNotNone(user.created_at)
         self.assertIsNotNone(user.updated_at)
+
+if __name__ == '__main__':
+    unittest.main()
