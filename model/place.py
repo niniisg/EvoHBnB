@@ -11,16 +11,39 @@ class Place:
         self.reviews.append(review)
 
     def validate_one_host_per_place(self, place_dao):
-        existing_place = place_dao.get_place_by_id(self.place_id)
-        if existing_place and existing_place.host != self.host:
+        """
+        Validates that only one host can be associated with each place.
+
+        Args:
+    place_dao (PlaceDAO): The data access object for place data.
+
+        Returns:
+            bool: True if the place can have the current host, False otherwise.
+        """
+        try:
+            existing_place = place_dao.get_place_by_id(self.place_id)
+            if existing_place and existing_place.host != self.host:
+                return False
+            return True
+        except AttributeError:
+            print("Error: The provided place_DAO object does not have a method 'get_place_by_id'.")
             return False
-        return True
 
 class PlaceDAO:
     def __init__(self):
+        """Initializes a new Place_DAO instance with an empty list of places."""
         self .places = []
 
     def get_place_by_id(self, place_id):
+        """
+        Retrieves a place by it's unique identifier.
+
+        Args:
+            place_id (int): The unique identifier for the place.
+
+        Returns:
+            Place: The place with the specified place_id, or None if not found.
+        """
         for place in self.places:
             if place.place_id == place_id:
                 return place
