@@ -1,5 +1,5 @@
 import uuid
 
-class city:
-    def __init__(self, name)
-        self.name
+class City:
+    def __init__(self, name):
+        self.name= name
