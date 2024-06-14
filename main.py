@@ -1,6 +1,6 @@
 #!/bin/python3
 from flask import Flask
-from API.city_enpoints import country_and_cities_routes
+from API.city_endpoints import country_and_cities_routes
 from API.user_route import user_routes
 from API.amenities_route import amenity_routes
 from flask_restx import Api
