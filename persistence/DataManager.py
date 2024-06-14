@@ -1,8 +1,8 @@
 import json
-from typing import Any, Dict
+from typing import Any, Dict, List
 from persistance.IPersistanceManager import IPersistanceManager
 from model.BaseModel import BaseModel
-
+from model.User import User  # Assuming you have a User class
 
 class DataManager(IPersistanceManager):
     def __init__(self):
@@ -14,7 +14,7 @@ class DataManager(IPersistanceManager):
         try:
             with open('countries.json', 'r') as f:
                 countries = json.load(f)
-            self.storage[Country'] = {country['code']: country for country in countries}
+            self.storage['Country'] = {country['code']: country for country in countries}
         except FileNotFoundError:
             self.storage['Country'] = {}
 
@@ -25,7 +25,7 @@ class DataManager(IPersistanceManager):
         entity_type = type(entity).__name__
         if entity_type not in self.storage:
             self.storage[entity_type] = {}
-        self.storage[entity_type][entity_id] = entity
+        self.storage[entity_type][entity.id] = entity
         entity.save()
 
     def get(self, entity_id: Any, entity_type: str) -> BaseModel:
@@ -40,7 +40,7 @@ class DataManager(IPersistanceManager):
             raise TypeError("Entity must be an instance of the BaseModel")
         entity_type = type(entity).__name__
         if entity_type in self.storage and entity.id in self.storage[entity_type]:
-            self.storage[entity_type][entity_id] = entity
+            self.storage[entity_type][entity.id] = entity
             entity.save()
         else:
             raise ValueError("Entity not found in storage")
@@ -51,3 +51,7 @@ class DataManager(IPersistanceManager):
             del self.storage[entity_type][entity_id]
         else:
             raise ValueError("Entity not found in storage")
+
+    def get_all_users(self) -> List[BaseModel]:
+        """Retrieves all user entities from the storage."""
+        return list(self.storage.get('User', {}).values())
