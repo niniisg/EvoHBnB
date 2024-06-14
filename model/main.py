@@ -1,6 +1,13 @@
+from flask import Flask
 from models import user
+from API.api import route_manager
+
+app = Flask(__name__)
+route_manager(app)
 
 if __name__ == "__main__":
+    app.run(port=8000, debug=True)
+    # Remember that port 8000 is for convinience as a dev. Reduces chances of conflict.
     # Example usage:
 
     # Create user instances (Eliminate this comment if this is the option)
