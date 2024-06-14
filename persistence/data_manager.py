@@ -1,4 +1,4 @@
-from persistence_manager import IPersistenceManager
+from persistence.persistence_manager import IPersistenceManager
 
 class DataManager(IPersistenceManager):
     def __init__(self):
@@ -7,13 +7,13 @@ class DataManager(IPersistenceManager):
     def save(self, object):
         self.storage[object.id] = object
           
-    def get(self, object_id, object_type):
+    def get(self, object_id):
         return self.storage[object_id]
 
     def update(self, object):
-        self.storage[object_id] = object
+        self.storage[object.id] = object
         
-    def delete(self, entity_id, entity_type):
+    def delete(self, object):
         if object in self.storage:
             del self.storage[object]
             

@@ -11,16 +11,14 @@ class User:
     
     users = []
 
-    def __init__(self, first_name, last_name,  email, password):
-        self.__user__id = uuid.self.uuid4
-        self.first_name = first_name
+    def __init__(self, email, first_name, last_name):
         self.last_name = last_name
-        self.__email = email
+        self.first_name = first_name
+        self.email = email
         User.used_emails.add(email)
-        self.password = password
         self.reviews = []
         
-        
+    '''   
     def __dict__(self):
         return {
             "id": self.__user__id,
@@ -28,7 +26,7 @@ class User:
             "email": self.__email,
             "password": self.password,
         }
-    
+    '''
     def new_name(self, first_name, last_name):
     
         if first_name == self.first_name and last_name == self.last_name:

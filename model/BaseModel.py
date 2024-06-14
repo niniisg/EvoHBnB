@@ -5,16 +5,19 @@ class BaseModel:
     def __init__(self):
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
-        self.update_at = None
+        self.updated_at = self.created_at
+        
+        """
 
     def __dict__(self):
         return {
             'id': self.id,
             'created_at': self.created_at.isoformat(),
-            'update_at': self.update_at.isoformat(),
+            'update_at': self.updated_at.isoformat(),
             'amenity name': None,
             'amenity descritpion': None,
         }
+        """
 
     def assign_id(self, id):
         id = self.id
@@ -38,5 +41,5 @@ class BaseModel:
             self.save
 
     @classmethod
-    def get_instances(cls):
+    def get_all(cls):
         return [instance for instance in cls.__dict__ if isinstance(instance, cls)]
