@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/Library/Frameworks/Python.framework/Versions/3.12/bin/python3
 from flask import Flask
 from API.city_endpoints import country_and_cities_routes
 from API.user_route import user_routes
