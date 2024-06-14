@@ -1,4 +1,11 @@
 #!/usr/bin/python3
+import uuid
+from model.review import Review
+from model.place import Place
+from model.country import Country
+from model.city import City
+from model.amenity import Amenity
+import datetime
 
 class User:
     def __init__(self, user_id, email, name):
