@@ -1,23 +1,38 @@
-import uuid
+from model.BaseModel import BaseModel
 
-class amenity:
+
+class Amenity(BaseModel):
     def __init__(self, name, description):
+        super().__init__()
         self.name = name
         self.description = description
-        self.amenities = []
-
-    def add_amenity(self, amenity):
-        if amenity not in self.amenities/
-            self.amenities.append(amenity)
+        self.place_id = None
+        
+        
+    def __dict__(self):
+        return{
+            'name': self.name,
+            'description': self.description,
+            'place id': self.place_id,
+        }
+    
+        
+    def add_amenity(self, name, description):
+        if self.name:
+            self.name = name
+        if self.description:
+            self.descripton = description
+        super().save(self)
+        super().__dict__(name='amenity name', description='amenity description')
+        
             
-    def update_amenity(self, amenity):
-        if amenity in self.amenities
-            self.amenities.append(amenity)
+    def update_amenity(self, name, description):
+        if name:
+            self.name = name
+        if description:
+            self.description = description
             
-    def description_amenity(self, amenity):
-        if amenity in self.amenities
-            self.amenities.append(amenity)
-            
-    def delete_amenity(self, amenity):
-        if amenity in self.amenities
-            self.amenities.remove(amenity)
+    def delete_amenity(self, amenity, cls='Amenity'):
+        amenity = super().get_instances(cls)
+        if isinstance(amenity, cls.__dict__):
+            super().delete(self)

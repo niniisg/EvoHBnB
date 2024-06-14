@@ -1,39 +1,42 @@
-from flask import Flask
 import uuid
-import datetime
-
+from datetime import datetime
 
 class BaseModel:
-    def __init__(self, *args, **kwargs):
-        if kwargs:
-            for key, value in kwargs.item():
-                if key == "created_at" or key == "update_at":
-                    self.__dict__[key] = datetime.strptime(value, dateformat)
-                elif key != "__class__":
-                    self.__dict__[key] = value
-        else:
-                self.id = str(uuid4)
-                self.created_at = datetime.know
-                self.update_at = self.created_at
-                model.storage.new(self)
-                model.storage.save()
+    def __init__(self):
+        self.id = str(uuid.uuid4())
+        self.created_at = datetime.now()
+        self.update_at = None
+
+    def __dict__(self):
+        return {
+            'id': self.id,
+            'created_at': self.created_at.isoformat(),
+            'update_at': self.update_at.isoformat(),
+            'amenity name': None,
+            'amenity descritpion': None,
+        }
+
+    def assign_id(self, id):
+        id = self.id
+        return id
 
     def __str__(self):
-        return (f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}")
+            return f"<{self.__class__.__name__} (id: {self.id} {self.__dict__})>"
 
-class user(BaseModel):
+    def save(self):
+        self.updated_at = datetime.now()
+        BaseModel.__dict__[self.id] = self
 
-    user = []
+    def delete(self):
+        if self.id in BaseModel.__dict__[self.id]:
+            del BaseModel.__dict__[self.id]
 
-    def __init__(self, name, email, password):
-        new_user = User(name, email, password):
-        if new_user in User.user:
-            raise ValueError("User is already exists")
-        if email in User.used_emails:
-            raise ValueError("email is already in used")
-        self.__user__id = uuid.self.uuid4
-        self.name = name
-        self.__email = email
-        User.used_emails.add(email)
-        self.password = password
-        self.reviews = []
+    def update(self, **kwargs):
+        for key, value in kwargs.items():
+            if key is not "__class__":
+                self.__dict__[key] = value
+            self.save
+
+    @classmethod
+    def get_instances(cls):
+        return [instance for instance in cls.__dict__ if isinstance(instance, cls)]
