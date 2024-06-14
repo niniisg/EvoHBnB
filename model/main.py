@@ -1,26 +1,17 @@
+#!/bin/python3
 from flask import Flask
-from models import user
-from API.api import route_manager
+from API.city_enpoints import country_and_cities_routes
+from API.user_route import user_routes
+from API.amenities_route import amenity_routes
+from flask_restx import Api
+
 
 app = Flask(__name__)
-route_manager(app)
+api = Api(app)
 
-if __name__ == "__main__":
-    app.run(port=8000, debug=True)
-    # Remember that port 8000 is for convinience as a dev. Reduces chances of conflict.
-    # Example usage:
+country_and_cities_routes(api)
+user_routes(api)
+amenity_routes(api)
 
-    # Create user instances (Eliminate this comment if this is the option)
-    # user1 = User("Angel", "angel@examplemail.com", "password123")
-    # print(user1)
-
-    # user2 = User("Nissel", "nissel@examplemail.com", "passwordnissel")
-    # print(user2)
-
-    # Handle duplicate emails case.
-    # try:
-    #    user3 = User("Carlos", "nissel@examplemail.com", "passwordcarl")
-    # except ValueError as e:
-    #    print(e)
-
-    pass #Placeholder for leaving the script running.
+if __name__ == '__main__':
+    app.run(debug=True)
